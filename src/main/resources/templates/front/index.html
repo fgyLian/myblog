@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/front/css/base.css" rel="stylesheet">
+    <link href="/front/css/index.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="/front/index">网站首页</a></li>
+            <li th:each="cat:${catList}"><a th:href="@{/front/category(categoryId=${cat.categoryId})}">[[${cat.categoryName}]]</a></li>
+            <li><a href="/front/message">留言</a></li>
+
+        </ul>
+    </nav>
+</header>
+<article>
+    <div class="pics">
+        <ul>
+            <li><img src="/front/picture/42d76eafa6495d9647a4fd245201f56c.jpg"></li>
+            <li><img src="/front/picture/c9668d65657bc41b77f6834984538979.jpg"></li>
+            <li><img src="/front/picture/13ec5c876bf437fd7e9e6b12b565a69c.jpg"></li>
+        </ul>
+    </div>
+    <div class="sleftbox">
+        <div class="newblogs">
+            <h2 class="hometitle">最新文章</h2>
+            <ul>
+                <li th:each="art:${articleList}">
+                    <h3 class="blogtitle"><a th:href="@{/front/listview(articleId=${art.articleId})}" target="_blank" >[[${art.articleTitle}]]</a></h3>
+                    <div class="bloginfo"><span class="blogpic"><a  th:href="@{/front/listview(articleId=${art.articleId})}" th:title="${art.articleTitle}"><img th:src="${art.articleImg}" th:alt="${art.articleTitle}" style="height: 100px"/></a></span>
+                        <p>[[${#strings.abbreviate(art.articleContent,50)}]]</p>
+                    </div>
+                    <div class="autor">
+                        <span class="lm f_l"><a th:href="@{/front/category(categoryId=${art.categoryId})}" title="css3" target="_blank"  class="classname">[[${art.categoryName}]]</a></span>
+                        <span class="dtime f_l">[[${#dates.format(art.articleTime,'yyyy-MM-dd HH:mm:ss')}]]</span>
+                        <span class="f_r"><a th:href="@{/front/listview(articleId=${art.articleId})}" class="more">阅读原文>></a></span>
+                    </div>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+    <div class="srightbox">
+        <div class="aboutme">
+            <h2 class="ab_title">关于我</h2>
+            <div class="avatar"><img src="/front/picture/b04.jpg" /></div>
+            <div class="ab_con">
+                <p>网名：XXX | XXX</p>
+                <p>职业：搬运工 </p>
+            </div>
+        </div>
+        <div class="search">
+            <form action="" method="post" name="searchform" id="searchform">
+                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+                <input name="show" value="title" type="hidden">
+                <input name="tempid" value="1" type="hidden">
+                <input name="tbname" value="news" type="hidden">
+                <input name="Submit" class="input_submit" value="搜索" type="submit">
+            </form>
+        </div>
+        <div class="paihang">
+            <h2 class="ab_title"><a href="/">站长推荐</a></h2>
+            <ul>
+                <li th:each="art:${articleList}">
+                    <b><a th:href="@{/front/listview(articleId=${art.articleId})}" target="_blank">[[${art.articleTitle}]]</a></b>
+                    <p>[[${#strings.abbreviate(art.articleContent,20)}]]</p>
+                </li>
+
+
+            </ul>
+            <div class="ad"><img src="/front/picture/ad300x100.jpg"></div>
+        </div>
+
+
+    </div>
+</article>
+<footer>
+    <p>Design by <a href="http://www.XXX.com">个人博客</a> <a href="/">渝ICP备</a></p>
+</footer>
+</body>
+</html>

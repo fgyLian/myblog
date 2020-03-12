@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/front/css/base.css" rel="stylesheet">
+    <link href="/front/css/index.css" rel="stylesheet">
+</head>
+<body>
+<header>
+
+    <nav>
+        <ul>
+            <li><a href="/front/index">网站首页</a></li>
+            <li th:each="cat:${catList}"><a th:href="@{/front/category(categoryId=${cat.categoryId})}">[[${cat.categoryName}]]</a></li>
+            <li><a href="/front/message">留言</a></li>
+        </ul>
+    </nav>
+</header>
+<article>
+    <div class="leftbox">
+        <div class="infos">
+            <div class="newsview">
+                <h2 class="intitle">您现在的位置是：<a href="/">首页</a>&nbsp;>&nbsp;<a href="/jstt/">[[${articleInfo.categoryName}]]</a></h2>
+                <h3 class="news_title">[[${articleInfo.articleTitle}]]</h3>
+                <div class="news_author">
+                    <span class="au01"></span>
+                    <span class="au02">[[${#dates.format(articleInfo.articleTime,'yyyy-MM-dd HH:mm:ss')}]]</span>
+
+                </div>
+
+
+                <div class="news_infos">
+                    <p th:text="${articleInfo.articleContent}"></p>
+                    <p th:utext="${articleInfo.articleContent}"></p>
+                    <!--[[${articleInfo.articleContent}]]-->
+                </div>
+            </div>
+            <div class="share">分享：</div>
+        </div>
+
+
+    </div>
+    <div class="rightbox">
+        <div class="search">
+            <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+                <input name="show" value="title" type="hidden">
+                <input name="tempid" value="1" type="hidden">
+                <input name="tbname" value="news" type="hidden">
+                <input name="Submit" class="input_submit" value="搜索" type="submit">
+            </form>
+        </div>
+
+        <div class="paihang">
+            <h2 class="ab_title"><a href="/">站长推荐</a></h2>
+            <ul>
+                <li th:each="art:${articleList}">
+                    <b><a th:href="@{/front/listview(articleId=${art.articleId})}" target="_blank">[[${art.articleTitle}]]</a></b>
+                    <p>[[${#strings.abbreviate(art.articleContent,20)}]]</p>
+                </li>
+            </ul>
+            <div class="ad"><img src="/front/picture/ad01.jpg"></div>
+        </div>
+
+    </div>
+</article>
+<footer>
+    <p>Design by <a href="http://www.XXX.com">个人博客</a> <a href="/">渝ICP备</a></p>
+</footer><script src="/js/61a9ee23bfbe484da195456aea8b6f8b.js"></script></body>
+</body>
+</html>

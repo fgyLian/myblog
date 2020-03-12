@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>修改用户 - 博客管理系统</title>
+<link rel="stylesheet" type="text/css" href="/admin/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/admin/css/style.css">
+<link rel="stylesheet" type="text/css" href="/admin/css/font-awesome.min.css">
+<link rel="apple-touch-icon-precomposed" href="/admin/images/icon/icon.png">
+<link rel="shortcut icon" href="/admin/images/icon/favicon.ico">
+<script src="/admin/js/jquery-2.1.4.min.js"></script>
+
+</head>
+
+<body class="user-select" style="margin: 0px;padding: 0px;">
+	<div>
+      		<ul class="breadcrumb" style="margin: 0px;">
+      			<li>用户管理</li>
+      			<li th:text="${user!=null}?'修改用户':'添加用户'">添加用户</li>
+      		</ul>
+      	</div>
+ 	
+      <form action="/back/user/doAdd" method="post" th:action="${user!=null}?'/back/user/doUpdate':'/back/user/doAdd'">
+        <div class="form-group">
+			<input type="hidden" name="userId" th:value="${user!=null}?${user.userId}">
+          	<label for="category-name">用户姓名</label>
+          	<input type="text" id="category-name" name="userName" class="form-control" placeholder="在此处输入用户姓名" required autocomplete="off" th:value="${user!=null}?${user.userName}">
+       </div>
+       <div class="form-group">
+          	<label for="category-name">电话号码</label>
+          	<input type="text"  name="userPhone" class="form-control" placeholder="在此处输入电话号码" required autocomplete="off" th:value="${user!=null}?${user.userPhone}">
+        </div> 
+       <div class="form-group">
+          	<label for="category-name">用户账号</label>
+          	<input type="text"  name="userAccount" class="form-control" placeholder="在此处输入用户账号" required autocomplete="off" th:value="${user!=null}?${user.userAccount}">
+        </div> 
+       <div class="form-group">
+          	<label for="category-name">用户密码</label>
+          	<input type="text"  name="userPassword" class="form-control" placeholder="在此处输入用户密码" required autocomplete="off" th:value="${user!=null}?${user.userPassword}">
+        </div> 
+        <button class="btn btn-primary" type="submit" name="submit"  th:text="${user!=null}?'修改用户':'添加用户'">添加用户</button>
+      </form>
+   
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/admin-scripts.js"></script>
+</body>
+</html>
